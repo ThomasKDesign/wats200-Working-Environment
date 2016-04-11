@@ -1,5 +1,8 @@
 $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
+// Override Bootstrap variables
+@import "variables";
+
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
@@ -10,6 +13,10 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   color: #000;
   padding: 0.2em 0;
 }
+
+// Site-specific styles
+// Add additional stylesheets below
+@import "content";
 
 /* Space out content a bit */
 body {
