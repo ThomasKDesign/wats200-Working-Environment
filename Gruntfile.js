@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'https://github.com/ThomasKDesign/wats2000-Working-Environment.git',
+          remote: 'git@github.com:ThomasKDesign/wats2000-Working-Environment.git',
           branch: 'gh-pages'
         }
       }
