@@ -64,9 +64,9 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       sass: {
-        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass', 'postcss']
-      },
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        tasks: ['sass:server', 'autoprefixer']
+    },
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
@@ -183,42 +183,30 @@ module.exports = function (grunt) {
 
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
-      options: {
-        sourceMap: true,
-        sourceMapEmbed: true,
-        sourceMapContents: true,
-        includePaths: ['.']
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/styles',
-          src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
-          ext: '.css'
-        }]
-      }
-    },
-
-    postcss: {
-      options: {
-        map: true,
-        processors: [
-          // Add vendor prefixed styles
-          require('autoprefixer')({
-            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']
-          })
-        ]
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      }
-    },
+         options: {
+             includePaths: [
+                 'bower_components'
+             ]
+         },
+         dist: {
+             files: [{
+                 expand: true,
+                 cwd: '<%= yeoman.app %>/styles',
+                 src: ['*.scss'],
+                 dest: '.tmp/styles',
+                 ext: '.css'
+             }]
+         },
+     server: {
+             files: [{
+                 expand: true,
+                 cwd: '<%= yeoman.app %>/styles',
+                 src: ['*.scss'],
+                 dest: '.tmp/styles',
+                 ext: '.css'
+             }]
+         }
+     },
 
     // Automatically inject Bower components into the HTML file
     wiredep: {
@@ -390,15 +378,15 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
-        'babel:dist',
-        'sass'
+        'sass:server',
+        'copy:styles'
       ],
       test: [
-        'babel'
+        'copy:styles'
       ],
       dist: [
-        'babel',
         'sass',
+        'copy:styles',
         'imagemin',
         'svgmin'
       ]
@@ -464,3 +452,4 @@ module.exports = function (grunt) {
     'build'
   ]);
 };
+
