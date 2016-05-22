@@ -2,16 +2,18 @@
 
 /**
  * @ngdoc overview
- * @name workspaceApp
+ * @name wats2000WorkingEnvironmentApp
  * @description
- * # workspaceApp
+ * # wats2000WorkingEnvironmentApp
  *
  * Main module of the application.
  */
 angular
-  .module('workspaceApp', [
+  .module('wats2000WorkingEnvironmentApp', [
     'ngAnimate',
+    'ngAria',
     'ngCookies',
+    'ngMessages',
     'ngResource',
     'ngRoute',
     'ngSanitize',
